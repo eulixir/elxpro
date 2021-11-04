@@ -1,5 +1,5 @@
 defmodule Telefonia do
   def cadastrar_assintante(nome, numero, cpf) do
-    %Assintante{nome: nome, numero: numero, cpf: cpf}
+    Assintante.cadastrar(nome, numero, cpf)
   end
 end
