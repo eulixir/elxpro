@@ -1,20 +1,20 @@
-defmodule Assintante do
+defmodule Assinante do
   defstruct nome: nil, numero: nil, cpf: nil, plano: nil
 
-  @assinantes %{:pre_pago => "pre_pago.txt", :pos_pago => "pos_pago.txt"}
+  @assinantes %{:prepago => "pre.txt", :pospago => "pos.txt"}
 
   def buscar_assinante(numero, key \\ :all), do: buscar(numero, key)
-  defp buscar(numero, :pre_pago), do: filtro(assinantes_pre_pago(), numero)
-  defp buscar(numero, :pos_pago), do: filtro(assinantes_pos_pago(), numero)
+  defp buscar(numero, :prepago), do: filtro(assinantes_prepago(), numero)
+  defp buscar(numero, :pospago), do: filtro(assinantes_pospago(), numero)
   defp buscar(numero, :all), do: filtro(assinantes(), numero)
 
   defp filtro(lista, numero), do: Enum.find(lista, &(&1.numero == numero))
 
-  def assinantes_pre_pago(), do: read(:pre_pago)
-  def assinantes_pos_pago(), do: read(:pos_pago)
-  def assinantes(), do: read(:pre_pago) ++ read(:pos_pago)
+  def assinantes_prepago(), do: read(:prepago)
+  def assinantes_pospago(), do: read(:pospago)
+  def assinantes(), do: read(:prepago) ++ read(:pospago)
 
-  def cadastrar(nome, numero, cpf, plano \\ :pre_pago) do
+  def cadastrar(nome, numero, cpf, plano \\ :prepago) do
     case buscar_assinante(numero) do
       nil ->
         (read(plano) ++ [%__MODULE__{nome: nome, numero: numero, cpf: cpf, plano: plano}])
