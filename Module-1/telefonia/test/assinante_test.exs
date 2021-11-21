@@ -1,7 +1,7 @@
 defmodule AssinanteTest do
   use ExUnit.Case
 
-  # doctest Assinante
+  doctest Assinante
 
   setup do
     File.write("pre.txt", :erlang.term_to_binary([]))
